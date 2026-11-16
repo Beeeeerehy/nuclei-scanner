@@ -1,0 +1,20 @@
+id: lab-cors-reflect
+info:
+  name: CORS Reflects Arbitrary Origin With Credentials (Teaching Lab)
+  author: student
+  severity: medium
+  description: Any origin is allowed to make credentialed cross-site requests.
+  tags: lab,cors
+http:
+  - method: GET
+    path: ["{{BaseURL}}/api/profile"]
+    headers:
+      Origin: https://evil.example
+    matchers:
+      - type: word
+        part: header
+        case-insensitive: true
+        words:
+          - "Access-Control-Allow-Origin: https://evil.example"
+          - "Access-Control-Allow-Credentials: true"
+        condition: and

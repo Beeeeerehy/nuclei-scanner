@@ -1,0 +1,16 @@
+id: lab-directory-listing
+info:
+  name: Directory Listing Enabled (Teaching Lab)
+  author: student
+  severity: medium
+  description: /backup/ lists its files, exposing backups to anyone.
+  tags: lab,exposure
+http:
+  - method: GET
+    path: ["{{BaseURL}}/backup/"]
+    matchers-condition: and
+    matchers:
+      - type: status
+        status: [200]
+      - type: word
+        words: ["Index of /backup"]

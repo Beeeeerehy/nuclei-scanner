@@ -1,0 +1,14 @@
+id: lab-server-version
+info:
+  name: Server Version Disclosure (Teaching Lab)
+  author: student
+  severity: low
+  description: The Server header reveals software and version, helping attackers target known flaws.
+  tags: lab,disclosure
+http:
+  - method: GET
+    path: ["{{BaseURL}}/"]
+    matchers:
+      - type: regex
+        part: header
+        regex: ["(?i)server: (Apache|nginx)/[0-9]"]

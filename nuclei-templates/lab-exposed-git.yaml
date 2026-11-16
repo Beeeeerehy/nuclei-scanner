@@ -1,0 +1,17 @@
+id: lab-exposed-git
+info:
+  name: Exposed .git Directory (Teaching Lab)
+  author: student
+  severity: medium
+  description: Repository metadata is publicly readable and can leak source code and URLs.
+  tags: lab,exposure
+http:
+  - method: GET
+    path: ["{{BaseURL}}/.git/config"]
+    matchers-condition: and
+    matchers:
+      - type: status
+        status: [200]
+      - type: word
+        words: ["[core]", "repositoryformatversion"]
+        condition: and

@@ -1,0 +1,16 @@
+id: lab-exposed-env
+info:
+  name: Exposed .env File (Teaching Lab)
+  author: student
+  severity: high
+  description: A .env file is publicly readable and contains credentials.
+  tags: lab,exposure
+http:
+  - method: GET
+    path: ["{{BaseURL}}/.env"]
+    matchers-condition: and
+    matchers:
+      - type: status
+        status: [200]
+      - type: word
+        words: ["DB_PASSWORD="]

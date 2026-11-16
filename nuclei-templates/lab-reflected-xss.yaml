@@ -1,0 +1,17 @@
+id: lab-reflected-xss
+info:
+  name: Reflected Input Not Escaped (Teaching Lab)
+  author: student
+  severity: medium
+  description: The q parameter is echoed into HTML unescaped, indicating reflected XSS.
+  tags: lab,xss
+http:
+  - method: GET
+    path: ["{{BaseURL}}/search?q=%3Ci%3Elabmarker7731%3C/i%3E"]
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words: ["<i>labmarker7731</i>"]
+      - type: status
+        status: [200]
